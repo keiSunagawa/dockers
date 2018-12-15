@@ -5,6 +5,13 @@ docker build -t amm .
 
 ## run
 ```
-docker run -it amm bash 
+# make container
+$ docker run -it --name scala_repl amm bash
+
+# dettach
+C-p C-q
+
+# attach
+$ docker attach scala_repl
 ```
 TODO mount host [scala & sbt cache] dir
