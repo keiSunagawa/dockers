@@ -41,3 +41,12 @@
           libXft-devel
         ]
         state: present
+
+    - name: delete emacs src archive
+      file:
+        path: /usr/local/src/emacs-26.1.tar.gz
+        state: absent
+    - name: delete emacs src dir
+      file:
+        path: /usr/local/src/emacs-26.1
+        state: absent
