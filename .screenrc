@@ -1,3 +1,14 @@
 defencodig utf-8
 escape ^Oo
 autodetach on
+bind 1 eval 'only'
+bind 2 eval 'split -h'
+bind 3 eval 'split -v'
+term screen-256color
+bind p focus up
+bind b focus left
+bind n focus down
+bind f focus right
+
+hardstatus alwayslastline "%{=r dd}%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+shelltitle "$ |kerfume"
