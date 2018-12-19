@@ -1,0 +1,43 @@
+- hosts: development
+  remote_user: kerfume
+  become: true
+  tasks:
+    - name: install base apps
+      yum:
+        name: [
+          gcc,
+          make,
+          wget,
+          git,
+          zsh
+        ]
+        state: present
+
+    - name: set zsh
+      command: chsh -s '/bin/zsh'
+
+    - name: install gnu screen
+      yum: name=screen state=present
+
+    - name: install emacs dependencies
+      yum:
+        name: [
+          giflib-devel,
+          libjpeg-devel,
+          libpng-devel,
+          libtiff-devel,
+          gtk2-devel,
+          libXaw-devel,
+          ncurses-devel,
+          libxml2-devel,
+          libotf-devel,
+          gnutls-devel,
+          libselinux-devel,
+          librsvg2-devel,
+          dbus-devel,
+          gpm-devel,
+          GConf2-devel,
+          m17n-lib-devel,
+          libXft-devel
+        ]
+        state: present
