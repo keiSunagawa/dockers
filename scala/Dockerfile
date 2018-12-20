@@ -1,25 +1,14 @@
-FROM ubuntu:16.04
+FROM centos:7
 
-# Install JDK, misc packages.
-RUN apt-get update && apt-get install -y \
-    default-jdk \
-    apt-transport-https \
-    curl
+# Install JDK.
+RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel \
+        && export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.144-0.b01.el7_4.x86_64 \
+        && export PATH=$PATH:$JAVA_HOME/bin \
+        && export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
 
 # Install sbt. See http://www.scala-sbt.org/1.0/docs/Installing-sbt-on-Linux.html
-RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
-RUN apt-get update && apt-get install -y sbt 
+RUN curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo \
+        && yum install -y sbt
 
-# RUN: docker buildするときに実行される
-# RUN curl -L https://github.com/lihaoyi/Ammonite/releases/download/1.5.0/2.12-1.5.0 > /usr/local/bin/amm && chmod +x /usr/local/bin/amm && mkdir /root/.ammonite
-
-# Install ammonite. See http://ammonite.io/#Ammonite-REPL
-RUN curl -L -o /usr/bin/amm https://git.io/vdNv2 && chmod +x /usr/bin/amm && mkdir /root/.ammonite
-
-RUN export TERM=vt100
-RUN mkdir -p ~/scala/src
-
-# CMD: docker runするときに実行される
 CMD bash
 
