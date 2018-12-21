@@ -1,0 +1,10 @@
+- hosts: development
+  remote_user: kerfume
+  become: true
+  roles:
+    - role: base
+      tags: base
+    - role: emacs
+      tags: emacs
+    - role: tmux
+      tags: tmux

@@ -1,0 +1,16 @@
+- name: install base apps
+  yum:
+    name: [
+      gcc,
+      make,
+      wget,
+      git,
+      zsh
+    ]
+    state: present
+
+- name: set zsh
+  command: chsh -s '/bin/zsh'
+
+- name: install gnu screen
+  yum: name=screen state=present
