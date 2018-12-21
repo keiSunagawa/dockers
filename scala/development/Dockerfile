@@ -1,4 +1,4 @@
-FROM sbt
+FROM scala
 
 # settings
 RUN mkdir -p ~/.sbt/1.0/plugins \
