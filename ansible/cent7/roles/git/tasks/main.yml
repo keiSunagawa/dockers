@@ -1,0 +1,47 @@
+- name: install git dependencies
+  yum:
+    name: [
+      curl-devel,
+      expat-devel,
+      libpng-devel,
+      libtiff-devel,
+      perl-devel,
+      zlib-devel,
+      autoconf,
+      asciidoc,
+      xmlto,
+      docbook2X,
+      make,
+      gcc
+    ]
+    state: present5
+
+- name: delete git src archive
+  file:
+    path: /usr/local/src/git-2.9.5.tar.gz
+    state: absent
+
+- name: delete git src dir
+  file:
+    path: /usr/local/src/git-2.9.5
+    state: absent
+
+- name: unarchive git src
+  unarchive:
+    src: https://www.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
+    dest: /usr/local/src
+    copy: no
+
+- name: configure git
+  shell: ./configure
+  args:
+    chdir: /usr/local/src/git-2.9.5
+
+- name: make all git
+  make:
+    chdir: /usr/local/src/git-2.9.5
+
+- name: make install git
+  make:
+    chdir: /usr/local/src/git-2.9.5
+    target: install
